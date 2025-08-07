@@ -3,111 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About</title>
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
     <link rel="stylesheet" href="assets/css/style.css">
-
-   <style>
-    body {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        margin: 0;
-        background-color: #f9fafb;
-        color: #1f2937;
-    }
-
-    h1, h3 {
-        color: #111827;
-    }
-
-    .wrapper {
-        padding: 2rem 1rem;
-        max-width: 1100px;
-        margin: auto;
-    }
-
-    .top-header h1 {
-        font-size: 2.5rem;
-        font-weight: 700;
-        text-align: center;
-        margin-bottom: 2rem;
-    }
-
-    .row {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 2rem;
-        justify-content: space-between;
-    }
-
-    .col {
-        flex: 1 1 48%;
-    }
-
-    .about-info {
-        background: white;
-        border-radius: 12px;
-        padding: 1.5rem;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    }
-
-    .about-info p {
-        font-size: 1rem;
-        line-height: 1.6;
-        margin-top: 0.5rem;
-    }
-
-    .skills-box {
-        background-color: white;
-        padding: 1.2rem;
-        margin-bottom: 1rem;
-        border-radius: 10px;
-        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
-    }
-
-    .skills-header h3 {
-        font-size: 1.1rem;
-        margin-bottom: 0.8rem;
-        color: #1f2937;
-    }
-
-    .skills-list {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.5rem;
-    }
-
-    .skills-list span {
-        background-color: #e5e7eb;
-        padding: 0.4rem 0.9rem;
-        border-radius: 9999px;
-        font-size: 0.9rem;
-        color: #111827;
-    }
-
-    /* Responsive for Mobile */
-    @media screen and (max-width: 768px) {
-        .row {
-            flex-direction: column;
-        }
-
-        .col {
-            flex: 1 1 100%;
-        }
-
-        .top-header h1 {
-            font-size: 2rem;
-        }
-
-        .about-info,
-        .skills-box {
-            padding: 1rem;
-        }
-
-        .skills-list span {
-            font-size: 0.85rem;
-        }
-    }
-</style>
+    <title>About</title>
 </head>
 <body>
    <div class="container">
@@ -135,11 +33,10 @@
         <div class="nav-button">
             <a href="./assets/File/YOGESH_P_21AD063_AIDS.pdf" download class="btn" style="text-decoration: none; color: black;">Download CV <i class="uil uil-file-alt"></i></a>
         </div>
-        <div class="nav-menu-btn">
+        <div     class="nav-menu-btn">
             <i class="uil uil-bars" onclick="myMenuFunction()"></i>
         </div>
-      </nav><br><br>
-
+      </nav>><br><br>
     <main class="wrapper">
        <section class="section" id="about">
           <div class="top-header">
@@ -149,7 +46,7 @@
             <div class="col">
                 <div class="about-info">
                     <h3>My Introduction</h3>
-                    <p>Hello! I’m YOGESH.P, a B.Tech graduate specializing in Artificial Intelligence & Data Science at Excel Engineering College, Namakkal. I am passionate about harnessing data to solve real-world challenges and building intelligent systems. Throughout my academic journey, I have gained hands-on experience in Full Stack web Development, Machine Learning, Data Analysis, and programming with tools. As I embark on my professional career, I am eager to apply my skills in Web Development and AI & Data Science to new opportunities. I look forward to contributing to the growth of a progressive organization while continuously learning and evolving in a dynamic work environment.</p>
+                    <p>Hello! I’m YOGESH.P, a B.Tech graduate specializing in Artificial Intelligence & Data Science at Excel Engineering College, Namakkal. I am passionate about harnessing data to solve real-world challenges and building intelligent systems. Throughout my academic journey, I have gained hands-on experience in Full Stack web Develpment, Machine Learning, data Analysis and programming with tools. As I embark on my professional career, I am eager to apply my skills in Web Development and  AI & Data Science to new opportunities. I look forward to contributing to the growth of a progressive organization while continuously learning and evolving in a dynamic work environment.</p>
                 </div>
             </div>
             <div class="col">
@@ -173,7 +70,7 @@
                 </div>
                 <div class="skills-box">
                     <div class="skills-header">
-                        <h3>Programming Languages</h3>
+                        <h3>Programing Languages</h3>
                     </div>
                     <div class="skills-list">
                         <span>TypeScript</span>
@@ -211,27 +108,33 @@
         </section>
     </main>
     </div>
-
     <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
     <script src="https://unpkg.com/scrollreveal"></script>
     <script src="assets/js/main.js"></script>
-    <script>
-        ScrollReveal().reveal('#about', {
-            delay: 200,
-            distance: '50px',
-            duration: 1000,
-            easing: 'ease-in-out'
-        });
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script src="assets/js/main.js"></script>
+        <script>
+            ScrollReveal().reveal('#about', {
+                delay: 200,
+                distance: '50px',
+                duration: 1000,
+                easing: 'ease-in-out'
+            }); 
+            function myMenuFunction(){
+  var menuBtn = document.getElementById("myNavMenu");
 
-        function myMenuFunction(){
-            var menuBtn = document.getElementById("myNavMenu");
-            if(menuBtn.className === "nav-menu"){
-                menuBtn.className += " responsive";
-            } else {
-                menuBtn.className = "nav-menu";
-            }
-        }
-    </script>
+  if(menuBtn.className === "nav-menu"){
+    menuBtn.className += " responsive";
+  } else {
+    menuBtn.className = "nav-menu";
+  }
+}
+        </script>
+    </body>
 </body>
 </html>
 
+
+
+
+i want to skill box is mobile responsive
