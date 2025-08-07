@@ -9,7 +9,7 @@
 </head>
 <body>
    <div class="container">
-      <nav id="header" >
+     <nav id="header">
         <div class="nav-logo">
             <p class="nav-name">Yogesh</p>
             <span>.</span>
@@ -17,7 +17,7 @@
         <div class="nav-menu" id="myNavMenu">
             <ul class="nav_menu_list">
                 <li class="nav_list">
-                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="about.html" class="nav-link">About</a>
                     <div class="circle"></div>
                 </li>
                 <li class="nav_list">
@@ -33,10 +33,10 @@
         <div class="nav-button">
             <a href="./assets/File/YOGESH_P_21AD063_AIDS.pdf" download class="btn" style="text-decoration: none; color: black;">Download CV <i class="uil uil-file-alt"></i></a>
         </div>
-        <div class="nav-menu-btn">
+        <div     class="nav-menu-btn">
             <i class="uil uil-bars" onclick="myMenuFunction()"></i>
         </div>
-      </nav><br><br>
+      </nav>><br><br>
     <main class="wrapper">
        <section class="section" id="about">
           <div class="top-header">
@@ -46,7 +46,7 @@
             <div class="col">
                 <div class="about-info">
                     <h3>My Introduction</h3>
-                    <p>Hello! I’m YOGESH.P, a B.Tech student specializing in Artificial Intelligence & Data Science at Excel Engineering College, Namakkal. I am passionate about harnessing data to solve real-world challenges and building intelligent systems. Throughout my academic journey, I have gained hands-on experience in machine learning, data analysis, web development and programming with tools. As I embark on my professional career, I am eager to apply my skills in AI and Data Science to new opportunities. I look forward to contributing to the growth of a progressive organization while continuously learning and evolving in a dynamic work environment.</p>
+                    <p>Hello! I’m YOGESH.P, a B.Tech graduate specializing in Artificial Intelligence & Data Science at Excel Engineering College, Namakkal. I am passionate about harnessing data to solve real-world challenges and building intelligent systems. Throughout my academic journey, I have gained hands-on experience in Full Stack web Develpment, Machine Learning, data Analysis and programming with tools. As I embark on my professional career, I am eager to apply my skills in Web Development and  AI & Data Science to new opportunities. I look forward to contributing to the growth of a progressive organization while continuously learning and evolving in a dynamic work environment.</p>
                 </div>
             </div>
             <div class="col">
@@ -65,8 +65,6 @@
                         <h3>Backend</h3>
                     </div>
                     <div class="skills-list">
-                        <span>Node.js</span>
-                        <span>Express.js</span>
                         <span>Nest.js</span>
                     </div>
                 </div>
@@ -77,7 +75,6 @@
                     <div class="skills-list">
                         <span>TypeScript</span>
                         <span>JavaScript</span>
-                        <span>Python</span>
                     </div>
                 </div>
                 <div class="skills-box">
@@ -85,9 +82,16 @@
                         <h3>Database</h3>
                     </div>
                     <div class="skills-list">
-                        <span>PostgreSQL</span>
-                        <span>SQLite</span>
+                        <span>MongoDB</span>
                         <span>Prisma ORM</span>
+                    </div>
+                </div>
+                <div class="skills-box">
+                    <div class="skills-header">
+                        <h3>Cloud & Infrastructure</h3>
+                    </div>
+                    <div class="skills-list">
+                        <span>AWS (S3)</span>
                     </div>
                 </div>
                 <div class="skills-box">
@@ -116,7 +120,17 @@
                 duration: 1000,
                 easing: 'ease-in-out'
             }); 
+            function myMenuFunction(){
+  var menuBtn = document.getElementById("myNavMenu");
+
+  if(menuBtn.className === "nav-menu"){
+    menuBtn.className += " responsive";
+  } else {
+    menuBtn.className = "nav-menu";
+  }
+}
         </script>
     </body>
 </body>
 </html>
+
