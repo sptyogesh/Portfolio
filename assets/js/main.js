@@ -30,7 +30,7 @@ function headerShadow() {
 
 
 var typingEffect = new Typed(".typedText",{
-  strings : ["ML Engineer","BI Analyst","Web Developer"],
+  strings : ["Full-Stack Developer",,"Web Developer", "BI Analyst"],
   loop : true,
   typeSpeed : 100, 
   backSpeed : 80,
@@ -106,4 +106,5 @@ sections.forEach(current =>{
 }
 
 window.addEventListener('scroll', scrollActive)
+
 
