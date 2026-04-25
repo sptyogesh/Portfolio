@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yogesh — Full Stack Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════
+   THEME TOKENS
+═══════════════════════════════════════ */
+:root {
+  --accent:      #6c63ff;
+  --accent2:     #00d9a0;
+  --accent3:     #ff6b6b;
+  --accent-rgb:  108,99,255;
+  --accent2-rgb: 0,217,160;
+}
+[data-theme="dark"] {
+  --bg:          #0a0a0f;
+  --surface:     #111118;
+  --card:        #16161f;
+  --card2:       #1c1c28;
+  --border:      rgba(255,255,255,0.07);
+  --border-b:    rgba(255,255,255,0.14);
+  --text:        #f0eff8;
+  --muted:       #8b8a9e;
+  --dim:         #4a4960;
+  --nav-bg:      rgba(10,10,15,0.88);
+  --hero-stroke: rgba(240,239,248,0.22);
+  --shadow:      rgba(0,0,0,0.45);
+  --tog-bg:      #1c1c28;
+  --tog-knob:    #f0eff8;
+}
+[data-theme="light"] {
+  --bg:          #f4f3fa;
+  --surface:     #ffffff;
+  --card:        #ffffff;
+  --card2:       #eeecf8;
+  --border:      rgba(0,0,0,0.07);
+  --border-b:    rgba(0,0,0,0.14);
+  --text:        #0e0d1c;
+  --muted:       #5a5870;
+  --dim:         #a9a8be;
+  --nav-bg:      rgba(244,243,250,0.9);
+  --hero-stroke: rgba(14,13,28,0.22);
+  --shadow:      rgba(108,99,255,0.1);
+  --tog-bg:      #dddbe8;
+  --tog-knob:    #0e0d1c;
+}
+
+/* ═══════════════════════════════════════
+   BASE RESET
+═══════════════════════════════════════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--bg);color:var(--text);
+  overflow-x:hidden;line-height:1.7;
+  transition:background .35s ease,color .35s ease;
+}
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:0;opacity:.45;
+}
+a{text-decoration:none}ul{list-style:none}
+img{max-width:100%;display:block}
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--accent);border-radius:2px}
+
+/* ═══════════════════════════════════════
+   NAV
+═══════════════════════════════════════ */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:0 4rem;height:64px;
+  border-bottom:1px solid var(--border);
+  background:var(--nav-bg);
+  backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  transition:background .35s,border-color .35s;
+}
+.nav-logo{
+  font-family:'Syne',sans-serif;font-weight:800;font-size:1.25rem;
+  letter-spacing:-.02em;color:var(--text);
+}
+.nav-logo span{color:var(--accent)}
+.nav-links{display:flex;gap:2.5rem}
+.nav-links a{
+  font-family:'DM Mono',monospace;font-size:.75rem;
+  color:var(--muted);letter-spacing:.06em;
+  transition:color .2s;position:relative;
+}
+.nav-links a::after{
+  content:'';position:absolute;bottom:-3px;left:0;right:0;
+  height:1px;background:var(--accent);
+  transform:scaleX(0);transform-origin:left;transition:transform .25s;
+}
+.nav-links a:hover{color:var(--text)}
+.nav-links a:hover::after{transform:scaleX(1)}
+.nav-right{display:flex;align-items:center;gap:.9rem}
+.nav-cta{
+  font-family:'DM Mono',monospace;font-size:.74rem;letter-spacing:.06em;
+  padding:.42rem 1.1rem;
+  border:1px solid var(--accent);color:var(--accent);
+  border-radius:4px;transition:all .2s;
+}
+.nav-cta:hover{background:var(--accent);color:#fff}
+
+/* Theme toggle */
+.tog{
+  width:46px;height:26px;
+  background:var(--tog-bg);border:1px solid var(--border-b);
+  border-radius:13px;cursor:pointer;position:relative;
+  transition:background .3s;flex-shrink:0;
+}
+.tog::before{
+  content:'🌙';position:absolute;
+  top:50%;left:5px;transform:translateY(-50%);
+  font-size:11px;pointer-events:none;
+  transition:opacity .3s;
+}
+.tog::after{
+  content:'';position:absolute;
+  top:3px;left:3px;width:18px;height:18px;
+  border-radius:50%;background:var(--tog-knob);
+  transition:transform .3s,background .3s;
+}
+[data-theme="light"] .tog::after{transform:translateX(20px)}
+[data-theme="light"] .tog::before{content:'☀️'}
+
+/* Hamburger */
+.hbg{
+  display:none;flex-direction:column;gap:5px;
+  cursor:pointer;background:none;border:none;padding:4px;
+}
+.hbg span{
+  display:block;width:24px;height:2px;
+  background:var(--text);border-radius:2px;transition:all .3s;
+}
+.hbg.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hbg.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.hbg.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* Mobile drawer */
+.mob-menu{
+  display:none;position:fixed;
+  top:64px;left:0;right:0;
+  background:var(--nav-bg);backdrop-filter:blur(24px);
+  border-bottom:1px solid var(--border);
+  padding:0 1.5rem;z-index:190;
+  flex-direction:column;
+  transform:translateY(-105%);
+  transition:transform .3s ease;
+  max-height:calc(100vh - 64px);overflow-y:auto;
+}
+.mob-menu.open{transform:translateY(0)}
+.mob-menu a{
+  font-family:'DM Mono',monospace;font-size:.85rem;
+  color:var(--muted);letter-spacing:.06em;
+  padding:.9rem 0;border-bottom:1px solid var(--border);
+  display:block;transition:color .2s;
+}
+.mob-menu a:last-child{border-bottom:none}
+.mob-menu a:hover{color:var(--accent)}
+
+/* ═══════════════════════════════════════
+   HERO
+═══════════════════════════════════════ */
+#hero{
+  min-height:100vh;display:flex;align-items:center;
+  position:relative;padding:7rem 4rem 4rem;overflow:hidden;
+}
+.h-grid{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(var(--border) 1px,transparent 1px),
+    linear-gradient(90deg,var(--border) 1px,transparent 1px);
+  background-size:64px 64px;
+  mask-image:radial-gradient(ellipse 80% 60% at 50% 0%,black,transparent 75%);
+  -webkit-mask-image:radial-gradient(ellipse 80% 60% at 50% 0%,black,transparent 75%);
+  pointer-events:none;
+}
+.orb{position:absolute;border-radius:50%;pointer-events:none;animation:orbP 7s ease-in-out infinite}
+.orb1{
+  width:min(650px,80vw);height:min(650px,80vw);
+  background:radial-gradient(circle,rgba(108,99,255,.13) 0%,transparent 70%);
+  top:-10%;right:-5%;
+}
+.orb2{
+  width:min(450px,60vw);height:min(450px,60vw);
+  background:radial-gradient(circle,rgba(0,217,160,.09) 0%,transparent 70%);
+  bottom:5%;left:5%;animation-delay:-3s;animation-duration:9s;
+}
+@keyframes orbP{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.08);opacity:.7}}
+
+.hero-inner{position:relative;z-index:1;max-width:860px;width:100%}
+.h-badge{
+  font-family:'DM Mono',monospace;font-size:.72rem;letter-spacing:.14em;
+  color:var(--accent2);margin-bottom:1.5rem;
+  display:inline-flex;align-items:center;gap:.6rem;
+}
+.h-badge::before{content:'';display:block;width:28px;height:1px;background:var(--accent2)}
+.h-dot{
+  width:7px;height:7px;border-radius:50%;background:var(--accent2);
+  animation:blink 2s infinite;box-shadow:0 0 6px var(--accent2);
+}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+.h-name{
+  font-family:'Syne',sans-serif;font-weight:800;
+  font-size:clamp(3rem,10vw,7.5rem);
+  line-height:.92;letter-spacing:-.04em;margin-bottom:.2em;
+}
+.h-name .outline{
+  color:transparent;
+  -webkit-text-stroke:1.5px var(--hero-stroke);
+}
+.h-sub{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(.9rem,2vw,1.2rem);font-weight:400;
+  color:var(--muted);margin:1rem 0 1.5rem;
+}
+.h-sub strong{color:var(--accent);font-weight:600}
+.h-desc{
+  font-size:clamp(.88rem,1.5vw,.98rem);
+  color:var(--muted);max-width:520px;margin-bottom:2.5rem;line-height:1.85;
+}
+.h-btns{display:flex;gap:.9rem;flex-wrap:wrap}
+.btn-p{
+  font-family:'DM Mono',monospace;font-size:.8rem;letter-spacing:.05em;
+  padding:.85rem 1.8rem;background:var(--accent);color:#fff;
+  border:1px solid var(--accent);border-radius:4px;cursor:pointer;
+  transition:all .22s;position:relative;overflow:hidden;
+  display:inline-block;
+}
+.btn-p:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(var(--accent-rgb),.35)}
+.btn-s{
+  font-family:'DM Mono',monospace;font-size:.8rem;letter-spacing:.05em;
+  padding:.85rem 1.8rem;background:transparent;color:var(--text);
+  border:1px solid var(--border-b);border-radius:4px;cursor:pointer;
+  transition:all .22s;display:inline-block;
+}
+.btn-s:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
+
+.h-stats{
+  position:absolute;right:4rem;bottom:4rem;
+  display:flex;flex-direction:column;gap:1.8rem;z-index:1;
+}
+.st{text-align:right;padding-right:1rem;border-right:2px solid var(--accent)}
+.st-n{font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--text);line-height:1}
+.st-l{font-family:'DM Mono',monospace;font-size:.64rem;color:var(--muted);letter-spacing:.1em;margin-top:.2rem}
+
+/* ═══════════════════════════════════════
+   SECTION BASE
+═══════════════════════════════════════ */
+section{padding:6rem 4rem;position:relative}
+hr.div{border:none;border-top:1px solid var(--border);margin:0}
+.s-tag{font-family:'DM Mono',monospace;font-size:.7rem;letter-spacing:.16em;color:var(--accent);margin-bottom:.75rem;text-transform:uppercase}
+.s-title{font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(1.75rem,4vw,2.8rem);letter-spacing:-.03em;line-height:1.1;margin-bottom:.75rem}
+.s-sub{color:var(--muted);max-width:500px;margin-bottom:3.5rem;font-size:.94rem}
+
+/* ═══════════════════════════════════════
+   ABOUT
+═══════════════════════════════════════ */
+#about{background:var(--surface)}
+.ab-grid{display:grid;grid-template-columns:360px 1fr;gap:5rem;align-items:center}
+.ab-vis{display:flex;align-items:center;justify-content:center;position:relative;height:350px}
+.ab-ring{
+  width:250px;height:250px;border-radius:50%;
+  border:1px solid var(--border-b);
+  display:flex;align-items:center;justify-content:center;position:relative;
+}
+.ab-ring::before{
+  content:'';position:absolute;inset:-18px;
+  border-radius:50%;border:1px dashed var(--border);
+  animation:spin 22s linear infinite;
+}
+.ab-ring::after{
+  content:'';position:absolute;inset:-48px;
+  border-radius:50%;border:1px dashed rgba(var(--accent-rgb),.12);
+  animation:spin 40s linear infinite reverse;
+}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.ab-dot{
+  position:absolute;width:9px;height:9px;border-radius:50%;
+  top:12px;left:50%;margin-left:-4px;
+}
+.ab-dot.d1{background:var(--accent2);box-shadow:0 0 8px var(--accent2);transform-origin:4px 113px;animation:orbit 7s linear infinite}
+.ab-dot.d2{background:var(--accent);box-shadow:0 0 8px var(--accent);transform-origin:4px 113px;animation:orbit 13s linear infinite reverse}
+@keyframes orbit{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.ab-init{font-family:'Syne',sans-serif;font-size:4.5rem;font-weight:800;color:var(--accent);letter-spacing:-.05em;line-height:1}
+.ab-badge{
+  position:absolute;bottom:10px;right:0;
+  background:var(--card2);border:1px solid var(--border-b);
+  border-radius:10px;padding:.9rem 1.1rem;text-align:center;
+  box-shadow:0 6px 24px var(--shadow);
+}
+.ab-badge-n{font-family:'Syne',sans-serif;font-size:1.9rem;font-weight:800;color:var(--accent);line-height:1}
+.ab-badge-l{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--muted);letter-spacing:.08em;margin-top:.2rem}
+.ab-body p{color:var(--muted);font-size:.94rem;margin-bottom:1.1rem}
+.chips{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:1.5rem}
+.chip{
+  font-family:'DM Mono',monospace;font-size:.7rem;
+  padding:.26rem .78rem;border:1px solid var(--border-b);
+  border-radius:3px;color:var(--muted);letter-spacing:.05em;
+  cursor:default;transition:all .2s;
+}
+.chip:hover{border-color:var(--accent);color:var(--accent);background:rgba(var(--accent-rgb),.06)}
+
+/* ═══════════════════════════════════════
+   SKILLS
+═══════════════════════════════════════ */
+#skills{background:var(--bg)}
+.sk-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+.sk-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:10px;padding:1.6rem;
+  transition:border-color .3s,transform .3s,box-shadow .3s;
+  position:relative;overflow:hidden;
+}
+.sk-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  transform:scaleX(0);transform-origin:left;transition:transform .35s;
+}
+.sk-card:hover{border-color:var(--border-b);transform:translateY(-3px);box-shadow:0 12px 32px var(--shadow)}
+.sk-card:hover::before{transform:scaleX(1)}
+.sk-ico{width:40px;height:40px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.15rem;margin-bottom:1rem}
+.fe{background:rgba(var(--accent-rgb),.1)}
+.be{background:rgba(var(--accent2-rgb),.1)}
+.db{background:rgba(255,107,107,.1)}
+.cl{background:rgba(255,200,100,.1)}
+.mo{background:rgba(100,200,255,.1)}
+.to{background:rgba(200,150,255,.1)}
+.sk-title{font-family:'Syne',sans-serif;font-size:.9rem;font-weight:600;margin-bottom:.8rem;color:var(--text)}
+.sk-tags{display:flex;flex-wrap:wrap;gap:.32rem}
+.sk-tag{
+  font-family:'DM Mono',monospace;font-size:.64rem;
+  padding:.16rem .52rem;
+  background:rgba(255,255,255,.03);
+  border:1px solid var(--border);border-radius:2px;color:var(--muted);
+}
+[data-theme="light"] .sk-tag{background:rgba(0,0,0,.03)}
+
+/* ═══════════════════════════════════════
+   EXPERIENCE
+═══════════════════════════════════════ */
+#experience{background:var(--surface)}
+.exp-line{position:relative;padding-left:2rem}
+.exp-line::before{
+  content:'';position:absolute;left:0;top:8px;bottom:0;width:1px;
+  background:linear-gradient(180deg,var(--accent),rgba(var(--accent-rgb),.1));
+}
+.exp-item{position:relative;padding:0 0 3.5rem 2.5rem}
+.exp-item:last-child{padding-bottom:0}
+.exp-item::before{
+  content:'';position:absolute;left:-5px;top:5px;
+  width:11px;height:11px;border-radius:50%;
+  background:var(--accent);border:2px solid var(--bg);
+  box-shadow:0 0 0 3px rgba(var(--accent-rgb),.2);
+}
+.exp-head{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:.5rem;margin-bottom:.35rem}
+.exp-co{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;color:var(--text)}
+.exp-per{
+  font-family:'DM Mono',monospace;font-size:.68rem;
+  color:var(--accent2);letter-spacing:.06em;
+  padding:.16rem .62rem;border:1px solid rgba(var(--accent2-rgb),.25);
+  border-radius:2px;white-space:nowrap;
+}
+.exp-role{font-family:'DM Mono',monospace;font-size:.78rem;color:var(--accent);margin-bottom:.9rem;letter-spacing:.04em}
+.exp-list{color:var(--muted);font-size:.9rem;display:flex;flex-direction:column;gap:.4rem}
+.exp-list li{padding-left:1.2rem;position:relative}
+.exp-list li::before{content:'→';position:absolute;left:0;color:var(--accent);font-size:.72rem;top:.15rem}
+
+/* ═══════════════════════════════════════
+   PROJECTS
+═══════════════════════════════════════ */
+#projects{background:var(--bg)}
+.proj-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.2rem}
+.proj-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:10px;padding:1.7rem;
+  transition:border-color .3s,transform .3s,box-shadow .3s;
+  display:flex;flex-direction:column;gap:.82rem;
+}
+.proj-card:hover{border-color:var(--accent);transform:translateY(-3px);box-shadow:0 12px 36px var(--shadow)}
+.proj-card.feat{grid-column:span 2;flex-direction:row;gap:2.5rem;align-items:flex-start}
+.proj-num{font-family:'DM Mono',monospace;font-size:.63rem;color:var(--dim);letter-spacing:.12em}
+.proj-title{font-family:'Syne',sans-serif;font-size:1.18rem;font-weight:700;color:var(--text);letter-spacing:-.02em}
+.proj-card.feat .proj-title{font-size:1.5rem}
+.proj-desc{color:var(--muted);font-size:.87rem;line-height:1.72;flex:1}
+.proj-stack{display:flex;flex-wrap:wrap;gap:.35rem}
+.proj-tech{
+  font-family:'DM Mono',monospace;font-size:.63rem;
+  padding:.16rem .56rem;
+  background:rgba(var(--accent-rgb),.08);
+  border:1px solid rgba(var(--accent-rgb),.2);
+  border-radius:2px;color:var(--accent);
+}
+.proj-links{display:flex;gap:.65rem;flex-wrap:wrap;margin-top:auto}
+.proj-link{
+  font-family:'DM Mono',monospace;font-size:.68rem;
+  color:var(--muted);letter-spacing:.05em;
+  border:1px solid var(--border);border-radius:3px;
+  padding:.28rem .72rem;transition:all .2s;
+  display:inline-flex;align-items:center;gap:.3rem;
+}
+.proj-link:hover{border-color:var(--border-b);color:var(--text)}
+
+/* ═══════════════════════════════════════
+   CONTACT
+═══════════════════════════════════════ */
+#contact{background:var(--surface)}
+.ct-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
+.ct-info p{color:var(--muted);font-size:.92rem;margin:1rem 0 2.2rem;max-width:360px}
+.c-item{
+  display:flex;align-items:center;gap:1rem;
+  padding:1rem 1.1rem;border:1px solid var(--border);
+  border-radius:8px;margin-bottom:.75rem;transition:all .2s;
+}
+.c-item:hover{border-color:var(--accent);background:rgba(var(--accent-rgb),.04)}
+.c-ico{
+  width:38px;height:38px;border-radius:8px;
+  background:rgba(var(--accent-rgb),.1);
+  border:1px solid rgba(var(--accent-rgb),.2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.82rem;flex-shrink:0;
+  font-family:'DM Mono',monospace;font-weight:500;color:var(--accent);
+}
+.c-lbl{font-family:'DM Mono',monospace;font-size:.63rem;color:var(--dim);letter-spacing:.1em;margin-bottom:.12rem}
+.c-val{font-size:.87rem;color:var(--text)}
+.ct-form{display:flex;flex-direction:column;gap:1rem}
+.fg{display:flex;flex-direction:column;gap:.36rem}
+.fl{font-family:'DM Mono',monospace;font-size:.66rem;color:var(--muted);letter-spacing:.1em}
+.fi{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:4px;padding:.7rem 1rem;color:var(--text);
+  font-family:'DM Sans',sans-serif;font-size:.9rem;
+  outline:none;transition:border-color .2s;resize:vertical;width:100%;
+}
+.fi:focus{border-color:var(--accent)}
+.fi::placeholder{color:var(--dim)}
+
+/* ═══════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════ */
+footer{
+  background:var(--bg);border-top:1px solid var(--border);
+  padding:1.8rem 4rem;
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:.5rem;
+}
+.f-l,.f-r{font-family:'DM Mono',monospace;font-size:.68rem;color:var(--dim);letter-spacing:.05em}
+.f-r span{color:var(--accent)}
+
+/* ═══════════════════════════════════════
+   CURSOR (desktop only)
+═══════════════════════════════════════ */
+.cr{width:8px;height:8px;background:var(--accent);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;mix-blend-mode:screen;transition:transform .1s}
+.crr{width:32px;height:32px;border:1px solid rgba(var(--accent-rgb),.5);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .2s,height .2s}
+
+/* ═══════════════════════════════════════
+   SCROLL REVEAL
+═══════════════════════════════════════ */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}
+.reveal.vis{opacity:1;transform:none}
+
+/* ═══════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════ */
+
+/* Large desktop 1400+ */
+@media(min-width:1400px){
+  nav{padding:0 6rem}
+  section{padding:7rem 6rem}
+  #hero{padding:8rem 6rem 5rem}
+  footer{padding:2rem 6rem}
+  .h-stats{right:6rem}
+}
+
+/* Small desktop / large tablet landscape 1000-1199 */
+@media(max-width:1199px){
+  nav{padding:0 2.5rem}
+  section{padding:5.5rem 2.5rem}
+  #hero{padding:7rem 2.5rem 4rem}
+  footer{padding:1.6rem 2.5rem}
+  .h-stats{right:2.5rem;bottom:3rem}
+  .ab-grid{grid-template-columns:300px 1fr;gap:3.5rem}
+  .sk-grid{grid-template-columns:repeat(2,1fr)}
+}
+
+/* Tablet portrait 768-999 */
+@media(max-width:999px){
+  nav{padding:0 2rem}
+  section{padding:5rem 2rem}
+  #hero{padding:6.5rem 2rem 3rem}
+  footer{padding:1.5rem 2rem}
+
+  .nav-links,.nav-cta{display:none}
+  .hbg{display:flex}
+  .mob-menu{display:flex}
+
+  .h-stats{display:none}
+  .ab-grid{grid-template-columns:1fr;gap:3rem}
+  .ab-vis{height:300px}
+  .ab-ring{width:230px;height:230px}
+  .ab-badge{right:8%}
+  .ab-dot.d1,.ab-dot.d2{transform-origin:4px 103px}
+
+  .sk-grid{grid-template-columns:repeat(2,1fr)}
+  .proj-grid{grid-template-columns:1fr}
+  .proj-card.feat{grid-column:span 1;flex-direction:column;gap:1rem}
+  .proj-card.feat .proj-title{font-size:1.3rem}
+  .ct-grid{grid-template-columns:1fr;gap:3rem}
+}
+
+/* Mobile large 480-767 */
+@media(max-width:767px){
+  nav{padding:0 1.5rem;height:60px}
+  section{padding:4rem 1.5rem}
+  #hero{padding:6rem 1.5rem 3rem}
+  footer{padding:1.5rem}
+  .mob-menu{top:60px;padding:0 1.5rem}
+
+  .h-name{font-size:clamp(2.8rem,13vw,4.8rem)}
+  .sk-grid{grid-template-columns:1fr}
+  .ab-vis{height:260px}
+  .ab-ring{width:200px;height:200px}
+  .ab-init{font-size:3.5rem}
+  .ab-dot.d1,.ab-dot.d2{transform-origin:4px 88px}
+  .ab-badge{right:6%;bottom:8px}
+}
+
+/* Mobile small max 479 */
+@media(max-width:479px){
+  nav{padding:0 1rem;height:56px}
+  section{padding:3.5rem 1rem}
+  #hero{padding:5.5rem 1rem 2.5rem}
+  footer{padding:1.2rem 1rem;flex-direction:column;text-align:center}
+  .mob-menu{top:56px;padding:0 1rem}
+
+  .h-badge{font-size:.64rem}
+  .h-name{font-size:clamp(2.4rem,14vw,3.5rem)}
+  .h-btns{flex-direction:column}
+  .btn-p,.btn-s{text-align:center;width:100%}
+
+  .ab-vis{height:230px}
+  .ab-ring{width:180px;height:180px}
+  .ab-init{font-size:3rem}
+  .ab-dot.d1,.ab-dot.d2{transform-origin:4px 78px}
+  .ab-badge{display:none}
+
+  .exp-head{flex-direction:column;gap:.3rem}
+  .proj-card{padding:1.3rem}
+  .s-title{font-size:clamp(1.5rem,7vw,2rem)}
+  .ct-grid{gap:2.5rem}
+}
+
+/* Touch devices — hide cursor */
+@media(hover:none){.cr,.crr{display:none}}
+</style>
+</head>
+<body>
+
+<div class="cr" id="cr"></div>
+<div class="crr" id="crr"></div>
+
+<!-- ══════ NAV ══════ -->
+<nav>
+  <a href="#" class="nav-logo">Y<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">about</a></li>
+    <li><a href="#skills">skills</a></li>
+    <li><a href="#experience">experience</a></li>
+    <li><a href="#projects">projects</a></li>
+    <li><a href="#contact">contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="tog" id="togBtn" title="Toggle theme" aria-label="Toggle light/dark mode"></button>
+    <a href="#contact" class="nav-cta">hire me</a>
+    <button class="hbg" id="hbg" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<nav class="mob-menu" id="mobMenu">
+  <a href="#about"      onclick="closeM()">// about</a>
+  <a href="#skills"     onclick="closeM()">// skills</a>
+  <a href="#experience" onclick="closeM()">// experience</a>
+  <a href="#projects"   onclick="closeM()">// projects</a>
+  <a href="#contact"    onclick="closeM()">// contact — hire me</a>
+</nav>
+
+<!-- ══════ HERO ══════ -->
+<section id="hero">
+  <div class="h-grid"></div>
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="hero-inner">
+    <div class="h-badge"><div class="h-dot"></div>available for opportunities</div>
+    <h1 class="h-name">
+      <div>YOGESH</div>
+      <div class="outline">FULLSTACK</div>
+    </h1>
+    <p class="h-sub"><strong>Full Stack Developer</strong> — web · mobile · cloud</p>
+    <p class="h-desc">1.5 years building end-to-end products with React, Next.js, NestJS, AWS, and React Native. From pixel-perfect UIs to production cloud infrastructure — I own the full stack.</p>
+    <div class="h-btns">
+      <a href="#projects" class="btn-p">View my work →</a>
+      <a href="#contact"  class="btn-s">Let's connect</a>
+    </div>
+  </div>
+  <div class="h-stats">
+    <div class="st"><div class="st-n">1.5+</div><div class="st-l">YRS EXP</div></div>
+    <div class="st"><div class="st-n">10+</div><div class="st-l">TECHNOLOGIES</div></div>
+    <div class="st"><div class="st-n">AWS</div><div class="st-l">CLOUD INFRA</div></div>
+  </div>
+</section>
+
+<hr class="div">
+
+<!-- ══════ ABOUT ══════ -->
+<section id="about">
+  <div class="ab-grid reveal">
+    <div class="ab-vis">
+      <div class="ab-ring">
+        <div class="ab-dot d1"></div>
+        <div class="ab-dot d2"></div>
+        <div class="ab-init">YK</div>
+      </div>
+      <div class="ab-badge">
+        <div class="ab-badge-n">1.5</div>
+        <div class="ab-badge-l">YEARS IN<br>FULL STACK</div>
+      </div>
+    </div>
+    <div class="ab-body">
+      <div class="s-tag">// about me</div>
+      <h2 class="s-title">Who I am</h2>
+      <p>I'm Yogesh, a full stack developer based in Chennai. I work across the entire stack — from crafting responsive React &amp; Next.js interfaces to architecting NestJS APIs, designing database schemas, and deploying scalable systems on AWS.</p>
+      <p>In 1.5 years I've shipped production apps with real users, covering web, mobile (React Native), and cloud infrastructure. I care about clean code, performance, and building things that actually work.</p>
+      <div class="chips">
+        <span class="chip">React.js</span><span class="chip">Next.js</span>
+        <span class="chip">NestJS</span><span class="chip">TypeScript</span>
+        <span class="chip">AWS</span><span class="chip">React Native</span>
+        <span class="chip">PostgreSQL</span><span class="chip">MongoDB</span>
+        <span class="chip">Redis</span><span class="chip">Prisma ORM</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="div">
+
+<!-- ══════ SKILLS ══════ -->
+<section id="skills">
+  <div class="s-tag reveal">// tech stack</div>
+  <h2 class="s-title reveal">Skills &amp; Technologies</h2>
+  <p class="s-sub reveal">A curated toolkit built through real-world projects — not just tutorials.</p>
+  <div class="sk-grid reveal">
+    <div class="sk-card">
+      <div class="sk-ico fe">⚛</div>
+      <div class="sk-title">Frontend</div>
+      <div class="sk-tags">
+        <span class="sk-tag">React.js</span><span class="sk-tag">Next.js</span>
+        <span class="sk-tag">Tailwind CSS</span><span class="sk-tag">HTML5</span>
+        <span class="sk-tag">Responsive UI/UX</span><span class="sk-tag">TypeScript</span>
+      </div>
+    </div>
+    <div class="sk-card">
+      <div class="sk-ico be">⚙</div>
+      <div class="sk-title">Backend</div>
+      <div class="sk-tags">
+        <span class="sk-tag">NestJS</span><span class="sk-tag">REST APIs</span>
+        <span class="sk-tag">WebSockets</span><span class="sk-tag">JWT Auth</span>
+        <span class="sk-tag">Auth0</span>
+      </div>
+    </div>
+    <div class="sk-card">
+      <div class="sk-ico db">🗄</div>
+      <div class="sk-title">Database</div>
+      <div class="sk-tags">
+        <span class="sk-tag">MongoDB</span><span class="sk-tag">PostgreSQL</span>
+        <span class="sk-tag">Prisma ORM</span><span class="sk-tag">Redis</span>
+        <span class="sk-tag">DB Design</span><span class="sk-tag">Optimization</span>
+      </div>
+    </div>
+    <div class="sk-card">
+      <div class="sk-ico cl">☁</div>
+      <div class="sk-title">Cloud — AWS</div>
+      <div class="sk-tags">
+        <span class="sk-tag">EC2</span><span class="sk-tag">S3</span><span class="sk-tag">RDS</span>
+        <span class="sk-tag">CloudFront</span><span class="sk-tag">VPC</span>
+        <span class="sk-tag">Elastic Beanstalk</span><span class="sk-tag">Amplify</span>
+        <span class="sk-tag">ElastiCache</span><span class="sk-tag">API Gateway</span>
+        <span class="sk-tag">IAM</span><span class="sk-tag">CloudWatch</span><span class="sk-tag">SES</span>
+      </div>
+    </div>
+    <div class="sk-card">
+      <div class="sk-ico mo">📱</div>
+      <div class="sk-title">Mobile</div>
+      <div class="sk-tags">
+        <span class="sk-tag">React Native</span><span class="sk-tag">Expo</span>
+        <span class="sk-tag">Push Notifications</span>
+        <span class="sk-tag">App Store</span><span class="sk-tag">Play Store</span>
+        <span class="sk-tag">Android &amp; iOS</span>
+      </div>
+    </div>
+    <div class="sk-card">
+      <div class="sk-ico to">🔧</div>
+      <div class="sk-title">Tools &amp; Others</div>
+      <div class="sk-tags">
+        <span class="sk-tag">Git</span><span class="sk-tag">Vercel</span>
+        <span class="sk-tag">Postman</span><span class="sk-tag">DNS Management</span>
+        <span class="sk-tag">JavaScript</span><span class="sk-tag">Hostinger</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="div">
+
+<!-- ══════ EXPERIENCE ══════ -->
+<section id="experience">
+  <div class="s-tag reveal">// work history</div>
+  <h2 class="s-title reveal">Experience</h2>
+  <p class="s-sub reveal">Building production-grade systems in a short but focused tenure.</p>
+  <div class="exp-line reveal">
+    <div class="exp-item">
+      <div class="exp-head">
+        <div class="exp-co">Full Stack Developer</div>
+        <div class="exp-per">2023 — PRESENT</div>
+      </div>
+      <div class="exp-role">// full-time · 1 year 6 months</div>
+      <ul class="exp-list">
+        <li>Built and deployed full-stack web applications using React.js, Next.js, and NestJS with RESTful APIs and WebSocket integrations for real-time features.</li>
+        <li>Architected cloud infrastructure on AWS — EC2, S3, RDS, CloudFront, Elastic Beanstalk, and ElastiCache — ensuring scalability and uptime.</li>
+        <li>Developed cross-platform mobile apps with React Native and Expo; handled end-to-end submissions for App Store and Play Store.</li>
+        <li>Designed and optimized databases using MongoDB, PostgreSQL, and Prisma ORM; implemented Redis caching to cut API response times.</li>
+        <li>Implemented secure authentication flows using Auth0 and JWT across multiple production applications.</li>
+        <li>Managed DNS configurations (Hostinger), Vercel deployments, and CI/CD pipelines for rapid, reliable delivery.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<hr class="div">
+
+<!-- ══════ PROJECTS ══════ -->
+<section id="projects">
+  <div class="s-tag reveal">// portfolio</div>
+  <h2 class="s-title reveal">Projects</h2>
+  <p class="s-sub reveal">Real-world applications — designed, engineered, and shipped to production.</p>
+  <div class="proj-grid reveal">
+    <div class="proj-card feat">
+      <div style="flex:1;display:flex;flex-direction:column;gap:.82rem">
+        <div class="proj-num">01 — FEATURED</div>
+        <div class="proj-title">Real-Time Collaboration Platform</div>
+        <p class="proj-desc">Full-stack collaborative workspace with Next.js frontend and NestJS backend. Live WebSocket rooms, persistent sessions via PostgreSQL + Prisma, Redis pub/sub, and full AWS deployment behind CloudFront CDN with S3 asset hosting.</p>
+        <div class="proj-stack">
+          <span class="proj-tech">Next.js</span><span class="proj-tech">NestJS</span>
+          <span class="proj-tech">WebSockets</span><span class="proj-tech">PostgreSQL</span>
+          <span class="proj-tech">Prisma</span><span class="proj-tech">Redis</span>
+          <span class="proj-tech">AWS CloudFront</span><span class="proj-tech">S3</span>
+        </div>
+        <div class="proj-links">
+          <a href="#" class="proj-link">↗ Live Demo</a>
+          <a href="#" class="proj-link">⌥ GitHub</a>
+        </div>
+      </div>
+    </div>
+    <div class="proj-card">
+      <div class="proj-num">02</div>
+      <div class="proj-title">E-Commerce Mobile App</div>
+      <p class="proj-desc">Cross-platform React Native app with Expo, Auth0 login, push notifications, and a NestJS + MongoDB Atlas backend. Deployed to both App Store and Play Store.</p>
+      <div class="proj-stack">
+        <span class="proj-tech">React Native</span><span class="proj-tech">Expo</span>
+        <span class="proj-tech">NestJS</span><span class="proj-tech">MongoDB</span>
+        <span class="proj-tech">Auth0</span>
+      </div>
+      <div class="proj-links">
+        <a href="#" class="proj-link">↗ App Store</a>
+        <a href="#" class="proj-link">⌥ GitHub</a>
+      </div>
+    </div>
+    <div class="proj-card">
+      <div class="proj-num">03</div>
+      <div class="proj-title">SaaS Dashboard &amp; API</div>
+      <p class="proj-desc">Multi-tenant SaaS platform with a Tailwind UI dashboard, NestJS REST API, IAM-secured AWS endpoints, transactional email via SES, and CloudWatch monitoring.</p>
+      <div class="proj-stack">
+        <span class="proj-tech">Next.js</span><span class="proj-tech">Tailwind</span>
+        <span class="proj-tech">NestJS</span><span class="proj-tech">AWS SES</span>
+        <span class="proj-tech">CloudWatch</span><span class="proj-tech">IAM</span>
+      </div>
+      <div class="proj-links">
+        <a href="#" class="proj-link">↗ Live Demo</a>
+        <a href="#" class="proj-link">⌥ GitHub</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="div">
+
+<!-- ══════ CONTACT ══════ -->
+<section id="contact">
+  <div class="ct-grid reveal">
+    <div class="ct-info">
+      <div class="s-tag">// contact</div>
+      <h2 class="s-title">Let's build<br>something great</h2>
+      <p>Open to full-time roles, freelance projects, and interesting collaborations. Let's talk.</p>
+      <a href="mailto:yogesh@example.com" class="c-item">
+        <div class="c-ico">✉</div>
+        <div><div class="c-lbl">EMAIL</div><div class="c-val">yogesh@example.com</div></div>
+      </a>
+      <a href="https://linkedin.com/in/yogesh" target="_blank" class="c-item">
+        <div class="c-ico">in</div>
+        <div><div class="c-lbl">LINKEDIN</div><div class="c-val">linkedin.com/in/yogesh</div></div>
+      </a>
+      <a href="https://github.com/yogesh" target="_blank" class="c-item">
+        <div class="c-ico">gh</div>
+        <div><div class="c-lbl">GITHUB</div><div class="c-val">github.com/yogesh</div></div>
+      </a>
+    </div>
+    <div class="ct-form">
+      <div class="fg"><label class="fl">YOUR NAME</label><input type="text" class="fi" placeholder="John Doe"></div>
+      <div class="fg"><label class="fl">EMAIL ADDRESS</label><input type="email" class="fi" placeholder="john@company.com"></div>
+      <div class="fg"><label class="fl">MESSAGE</label><textarea class="fi" rows="5" placeholder="Tell me about your project..."></textarea></div>
+      <button class="btn-p" style="width:fit-content">Send message →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ FOOTER ══════ -->
+<footer>
+  <div class="f-l">© 2024 Yogesh · Full Stack Developer · Chennai, India</div>
+  <div class="f-r">Built with <span>♥</span> — Next.js · NestJS · AWS</div>
+</footer>
+
+<script>
+/* Theme */
+const html=document.documentElement,togBtn=document.getElementById('togBtn');
+const saved=localStorage.getItem('yg-theme')||'dark';
+html.setAttribute('data-theme',saved);
+togBtn.addEventListener('click',()=>{
+  const next=html.getAttribute('data-theme')==='dark'?'light':'dark';
+  html.setAttribute('data-theme',next);
+  localStorage.setItem('yg-theme',next);
+});
+
+/* Mobile menu */
+const hbg=document.getElementById('hbg'),mobMenu=document.getElementById('mobMenu');
+hbg.addEventListener('click',()=>{hbg.classList.toggle('open');mobMenu.classList.toggle('open')});
+function closeM(){hbg.classList.remove('open');mobMenu.classList.remove('open')}
+document.addEventListener('click',e=>{if(!mobMenu.contains(e.target)&&!hbg.contains(e.target))closeM()});
+
+/* Cursor */
+const cr=document.getElementById('cr'),crr=document.getElementById('crr');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cr.style.left=(mx-4)+'px';cr.style.top=(my-4)+'px'});
+(function loop(){rx+=(mx-rx)*.13;ry+=(my-ry)*.13;crr.style.left=rx+'px';crr.style.top=ry+'px';requestAnimationFrame(loop)})();
+document.querySelectorAll('a,button').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{crr.style.width='46px';crr.style.height='46px';cr.style.opacity='.35'});
+  el.addEventListener('mouseleave',()=>{crr.style.width='32px';crr.style.height='32px';cr.style.opacity='1'});
+});
+
+/* Scroll reveal */
+const ro=new IntersectionObserver(entries=>{
+  entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('vis'),i*70);ro.unobserve(e.target)}});
+},{threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+
+/* Active nav */
+const secs=document.querySelectorAll('section[id]'),nls=document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll',()=>{
+  let cur='';
+  secs.forEach(s=>{if(window.scrollY>=s.offsetTop-130)cur=s.id});
+  nls.forEach(a=>{a.style.color=a.getAttribute('href')==='#'+cur?'var(--text)':''});
+},{passive:true});
+</script>
+</body>
+</html>
