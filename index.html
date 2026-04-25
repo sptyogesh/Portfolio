@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yogesh — Full Stack Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="cr" id="cr"></div>
+<div class="crr" id="crr"></div>
+
+<!-- ══════ NAV ══════ -->
+<nav>
+  <a href="#" class="nav-logo">Y<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">about</a></li>
+    <li><a href="#skills">skills</a></li>
+    <li><a href="#experience">experience</a></li>
+    <li><a href="#projects">projects</a></li>
+    <li><a href="#education">education</a></li>
+    <li><a href="#certificates">certificates</a></li>
+    <li><a href="#contact">contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="tog" id="togBtn" title="Toggle theme" aria-label="Toggle light/dark mode"></button>
+    <a href="#contact" class="nav-cta">hire me</a>
+    <button class="hbg" id="hbg" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<nav class="mob-menu" id="mobMenu">
+  <a href="#about"      onclick="closeM()">// about</a>
+  <a href="#skills"     onclick="closeM()">// skills</a>
+  <a href="#experience" onclick="closeM()">// experience</a>
+  <a href="#projects"   onclick="closeM()">// projects</a>
+  <a href="#education"  onclick="closeM()">// education</a>
+  <a href="#certificates" onclick="closeM()">// certificates</a>
+  <a href="#contact"    onclick="closeM()">// contact — hire me</a>
+</nav>
+
+<!-- ══════ SECTIONS ══════ -->
+<main id="main-content">
+  <div data-section="hero"></div>
+  <hr class="div">
+  <div data-section="about"></div>
+  <hr class="div">
+  <div data-section="skills"></div>
+  <hr class="div">
+  <div data-section="experience"></div>
+  <hr class="div">
+  <div data-section="projects"></div>
+  <hr class="div">
+  <div data-section="education"></div>
+  <hr class="div">
+  <div data-section="certificates"></div>
+  <hr class="div">
+  <div data-section="contact"></div>
+</main>
+
+<!-- ══════ FOOTER ══════ -->
+<footer>
+  <div class="f-l">© 2026 Yogesh · Full Stack Developer · Coimbatore, India</div>
+  <div class="f-r">Built with <span>♥</span> — React · NestJS · AWS</div>
+</footer>
+
+<script src="js/script.js"></script>
+</body>
+</html>
