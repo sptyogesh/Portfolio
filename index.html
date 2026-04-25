@@ -1,75 +1,13 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Portfolio</title>
-    <style>
-        html{
-    scroll-behavior: smooth;
-    height: 100%;
-    overflow: hidden;
-}
-    </style>
-</head>
-<body>
-   <div class="container">
-      <nav id="header">
-        <div class="nav-logo">
-            <p class="nav-name">Yogesh</p>
-            <span>.</span>
-        </div>
-        <div class="nav-menu" id="myNavMenu">
-            <ul class="nav_menu_list">
-                <li class="nav_list">
-                    <a href="about.html" class="nav-link">About</a>
-                    <div class="circle"></div>
-                </li>
-                <li class="nav_list">
-                    <a href="project.html" class="nav-link">Projects</a>
-                    <div class="circle"></div>
-                </li>
-                <li class="nav_list">
-                    <a href="contact.html" class="nav-link">Contact</a>
-                    <div class="circle"></div>
-                </li>
-            </ul>
-        </div>
-        <div class="nav-button">
-            <a href="./assets/File/YOGESH_P_21AD063_AIDS.pdf" download class="btn" style="text-decoration: none; color: black;">Download CV <i class="uil uil-file-alt"></i></a>
-        </div>
-        <div     class="nav-menu-btn">
-            <i class="uil uil-bars" onclick="myMenuFunction()"></i>
-        </div>
-      </nav>
-    <main class="wrapper">
-       <section class="featured-box" id="home">
-          <div class="featured-text">           
-            <div class="featured-name">
-                <p>I'm <span class="typedText"></span></p>
-            </div>
-            <div class="featured-text-info">
-                <p>Experienced Data Science & Full-Stack Developer enthusiast with a passion for solving real-world problems through machine learning & data-driven solutions and a Web Developer passionate about creating visually stunning and user-friendly websites.
-                </p>
-            </div>
-            <div class="social_icons">
-                <div class="icon"><a href="mailto:yogeshpmk2004@gmail.com" target="_blank"><i class="uil uil-envelope"></i></a></div>
-                <div class="icon"><a href="https://www.linkedin.com/in/yogesh-p-4b9454325" target="_blank"><i class="uil uil-linkedin-alt"></i></a></div>
-                <div class="icon"><a href="https://github.com/sptyogesh/" target="_blank"><i class="uil uil-github-alt"></i></a></div>
-            </div>
-          </div>
-          <div class="featured-image">
-            <div class="image">
-                <img src="./assets/images/photo.png" alt="avatar">
-            </div>
-          </div>
-       </section>
-    </main>
-    </div>
-    <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
-    <script src="https://unpkg.com/scrollreveal"></script>
-    <script src="assets/js/main.js"></script>
-</body>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>
