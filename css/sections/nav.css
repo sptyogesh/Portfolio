@@ -18,7 +18,7 @@ nav{
 .nav-links{display:flex;gap:2.5rem}
 .nav-links a{
   font-family:'DM Mono',monospace;font-size:.75rem;
-  color:var(--muted);letter-spacing:.06em;
+  color:var(--text); letter-spacing:.06em;
   transition:color .2s;position:relative;
 }
 .nav-links a::after{

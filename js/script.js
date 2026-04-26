@@ -23,6 +23,7 @@ async function loadSections() {
   initCursor();
   initScrollReveal();
   initActiveNav();
+  initContactForm();
 
   // Handle initial hash navigation (e.g. index.html#projects)
   if (window.location.hash) {
@@ -152,5 +153,231 @@ function initActiveNav() {
   });
 }
 
+/* ═══════════════════════════════════════
+   PROJECT MODAL
+   ═══════════════════════════════════════ */
+const projectData = {
+  ysdesk: {
+    title: "YSDesk",
+    tagline: "Real-Time Customer Support Platform",
+    desc: "A production-grade real-time customer support system developed as part of my work at YS Innovations. The platform enables seamless communication between agents and website visitors with live tracking and low-latency messaging.",
+    contributions: [
+      "Built WebSocket-based real-time messaging system for instant agent–visitor communication",
+      "Implemented live visitor tracking with multi-tab session handling and presence detection",
+      "Designed role-based access control (RBAC) for admins, agents, and users",
+      "Developed scalable backend APIs using NestJS for chat, session management, and analytics",
+      "Integrated Redis for caching and real-time event handling",
+      "Deployed and managed infrastructure on AWS (EC2, S3, CloudFront, RDS)"
+    ],
+    impact: [
+      "Enabled real-time communication with minimal latency",
+      "Improved system scalability and user experience for concurrent users"
+    ]
+  },
+  hirez: {
+    title: "HireZ",
+    tagline: "Rental Platform (Full Stack)",
+    desc: "A full-stack rental platform designed to connect property owners and tenants directly, eliminating intermediaries and improving transparency in pricing and communication.",
+    contributions: [
+      "Developed backend APIs for property listings, user management, and communication workflows",
+      "Designed database schema using Prisma and PostgreSQL for efficient data handling",
+      "Optimized database queries for faster property search and filtering",
+      "Built responsive frontend interfaces using Next.js for seamless user experience"
+    ],
+    impact: [
+      "Reduced dependency on brokers by enabling direct owner–tenant interaction",
+      "Improved performance of listing and search features"
+    ]
+  },
+  microfinance: {
+    title: "Micro-Finance Platform",
+    tagline: "Micro-Finance Operations Platform — Financial System",
+    desc: "A full-stack financial management system designed to digitize and automate micro-finance operations across the entire loan lifecycle.",
+    contributions: [
+      "Built backend services for loan onboarding, approval, disbursement, and repayment tracking",
+      "Designed scalable APIs and database models for financial data handling",
+      "Developed analytics dashboards to monitor loan performance and financial metrics",
+      "Ensured secure data handling and structured workflows for financial operations"
+    ],
+    impact: [
+      "Streamlined manual financial processes into a digital system",
+      "Improved tracking accuracy and operational efficiency"
+    ]
+  },
+  trackvision: {
+    title: "TrackVisionAI",
+    tagline: "Real-Time Object Tracking System",
+    desc: "An AI-powered system for tracking and monitoring objects in real-time using computer vision models.",
+    contributions: [
+      "Integrated AI models for object detection and tracking using TensorFlow",
+      "Built backend services using FastAPI for processing and serving tracking data",
+      "Developed frontend dashboard for visualizing live tracking results",
+      "Implemented alert mechanisms for event-based tracking insights"
+    ],
+    impact: [
+      "Enabled real-time monitoring and analysis of visual data",
+      "Improved tracking accuracy and responsiveness"
+    ]
+  },
+  roadsafety: {
+    title: "Road Safety Detection",
+    tagline: "AI-Based Monitoring System",
+    desc: "A computer vision-based system designed to detect road violations and generate real-time alerts for traffic monitoring.",
+    contributions: [
+      "Developed computer vision models to detect traffic violations",
+      "Implemented real-time alert system for monitoring unsafe driving patterns",
+      "Integrated IoT/visual data inputs for continuous analysis",
+      "Built processing pipeline for handling real-time video streams"
+    ],
+    impact: [
+      "Enhanced traffic monitoring and safety awareness",
+      "Provided automated detection of violations"
+    ]
+  }
+};
+
+function openP(id) {
+  const modal = document.getElementById('projModal');
+  const mBody = document.getElementById('m-body');
+  const p = projectData[id];
+  if (!p || !modal || !mBody) return;
+
+  mBody.innerHTML = `
+    <div class="m-header">
+      <div class="m-tagline">${p.tagline}</div>
+      <h3 class="m-title">${p.title}</h3>
+    </div>
+    <div class="m-section">
+      <div class="m-section-title">Overview</div>
+      <p style="font-size: 1rem; color: var(--muted); line-height: 1.8;">${p.desc}</p>
+    </div>
+    <div class="m-section">
+      <div class="m-section-title">Key Contributions</div>
+      <ul class="m-list">
+        ${p.contributions.map(c => `<li>${c}</li>`).join('')}
+      </ul>
+    </div>
+    <div class="m-section">
+      <div class="m-section-title">Impact</div>
+      <div class="m-impact">
+        <ul class="m-list m-impact-list">
+          ${p.impact.map(i => `<li>${i}</li>`).join('')}
+        </ul>
+      </div>
+    </div>
+  `;
+
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeP() {
+  const modal = document.getElementById('projModal');
+  if (modal) modal.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
 // Start everything
 loadSections();
+
+// Global click handlers for modal
+document.addEventListener('click', (e) => {
+  const modal = document.getElementById('projModal');
+  if (e.target.id === 'closeModal' || e.target === modal) closeP();
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeP();
+});
+
+/* ═══════════════════════════════════════
+   CONTACT FORM HANDLER
+   ═══════════════════════════════════════ */
+function initContactForm() {
+  const form = document.getElementById('contactForm');
+  const successMsg = document.getElementById('successMsg');
+  const submitBtn = document.getElementById('submitBtn');
+
+  if (!form || !successMsg || !submitBtn) return;
+
+  form.onsubmit = async (e) => {
+    e.preventDefault();
+    
+    // Manual Validation
+    let isValid = true;
+    const name = document.getElementById('name');
+    const email = document.getElementById('email');
+    const message = document.getElementById('message');
+
+    // Reset states
+    [name, email, message].forEach(el => {
+      el.classList.remove('invalid');
+      el.parentElement.classList.remove('invalid');
+    });
+
+    if (name.value.trim().length < 2) {
+      name.classList.add('invalid');
+      name.parentElement.classList.add('invalid');
+      isValid = false;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email.value)) {
+      email.classList.add('invalid');
+      email.parentElement.classList.add('invalid');
+      isValid = false;
+    }
+
+    if (message.value.trim().length < 10) {
+      message.classList.add('invalid');
+      message.parentElement.classList.add('invalid');
+      isValid = false;
+    }
+
+    if (!isValid) return;
+    
+    // Start Loading
+    submitBtn.classList.add('loading');
+    submitBtn.disabled = true;
+
+    const formData = new FormData(form);
+    
+    try {
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        // Success
+        form.classList.add('hide');
+        setTimeout(() => {
+          successMsg.classList.add('show');
+          form.reset();
+        }, 400);
+      } else {
+        const data = await response.json();
+        throw new Error(data.error || 'Submission failed');
+      }
+    } catch (err) {
+      console.error(err);
+      alert('Oops! There was a problem submitting your form. Please try again.');
+    } finally {
+      submitBtn.classList.remove('loading');
+      submitBtn.disabled = false;
+    }
+  };
+}
+
+function resetForm() {
+  const form = document.getElementById('contactForm');
+  const successMsg = document.getElementById('successMsg');
+  if (form && successMsg) {
+    successMsg.classList.remove('show');
+    setTimeout(() => {
+      form.classList.remove('hide');
+    }, 300);
+  }
+}
