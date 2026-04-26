@@ -4,29 +4,6 @@
 #about{background:var(--surface)}
 .ab-grid{display:grid;grid-template-columns:360px 1fr;gap:5rem;align-items:center}
 .ab-vis{display:flex;align-items:center;justify-content:center;position:relative;height:350px}
-.ab-ring{
-  width:250px;height:250px;border-radius:50%;
-  border:1px solid var(--border-b);
-  display:flex;align-items:center;justify-content:center;position:relative;
-}
-.ab-ring::before{
-  content:'';position:absolute;inset:-18px;
-  border-radius:50%;border:1px dashed var(--border);
-  animation:spin 22s linear infinite;
-}
-.ab-ring::after{
-  content:'';position:absolute;inset:-48px;
-  border-radius:50%;border:1px dashed rgba(var(--accent-rgb),.12);
-  animation:spin 40s linear infinite reverse;
-}
-@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
-.ab-dot{
-  position:absolute;width:9px;height:9px;border-radius:50%;
-  top:12px;left:50%;margin-left:-4px;
-}
-.ab-dot.d1{background:var(--accent2);box-shadow:0 0 8px var(--accent2);transform-origin:4px 113px;animation:orbit 7s linear infinite}
-.ab-dot.d2{background:var(--accent);box-shadow:0 0 8px var(--accent);transform-origin:4px 113px;animation:orbit 13s linear infinite reverse}
-@keyframes orbit{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 .ab-init{font-family:'Syne',sans-serif;font-size:4.5rem;font-weight:800;color:var(--accent);letter-spacing:-.05em;line-height:1}
 .ab-badge{
   position:absolute;bottom:10px;right:0;
@@ -46,27 +23,28 @@
 }
 .chip:hover{border-color:var(--accent);color:var(--accent);background:rgba(var(--accent-rgb),.06)}
 
+.ab-img {
+  object-fit: cover; position: relative;
+}
+
 @media(max-width:1199px){
   .ab-grid{grid-template-columns:300px 1fr;gap:3.5rem}
 }
 @media(max-width:999px){
   .ab-grid{grid-template-columns:1fr;gap:3rem}
   .ab-vis{height:300px}
-  .ab-ring{width:230px;height:230px}
+  .ab-img{width:230px;height:230px}
   .ab-badge{right:8%}
-  .ab-dot.d1,.ab-dot.d2{transform-origin:4px 103px}
 }
 @media(max-width:767px){
   .ab-vis{height:260px}
-  .ab-ring{width:200px;height:200px}
+  .ab-img{width:200px;height:200px}
   .ab-init{font-size:3.5rem}
-  .ab-dot.d1,.ab-dot.d2{transform-origin:4px 88px}
   .ab-badge{right:6%;bottom:8px}
 }
 @media(max-width:479px){
   .ab-vis{height:230px}
-  .ab-ring{width:180px;height:180px}
+  .ab-img{width:180px;height:180px}
   .ab-init{font-size:3rem}
-  .ab-dot.d1,.ab-dot.d2{transform-origin:4px 78px}
   .ab-badge{display:none}
 }

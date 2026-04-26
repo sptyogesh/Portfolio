@@ -115,8 +115,6 @@
 .m-list li { position: relative; padding-left: 1.5rem; font-size: 0.95rem; color: var(--text); line-height: 1.6; }
 .m-list li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-family: 'DM Mono', monospace; }
 
-.m-impact { background: rgba(var(--accent2-rgb), 0.05); border: 1px solid rgba(var(--accent2-rgb), 0.15); padding: 1.5rem; border-radius: 8px; }
-.m-impact-list li::before { color: var(--accent2); content: '🚀'; }
 
 @media(max-width: 767px) {
   .m-content { padding: 2rem 1.5rem; border-radius: 12px; }

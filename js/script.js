@@ -47,7 +47,7 @@ function initTheme() {
   const togBtn = document.getElementById('togBtn');
   if (!togBtn) return;
   
-  const saved = localStorage.getItem('yg-theme') || 'dark';
+  const saved = localStorage.getItem('yg-theme') || 'light';
   html.setAttribute('data-theme', saved);
   
   togBtn.onclick = () => {
@@ -168,10 +168,6 @@ const projectData = {
       "Developed scalable backend APIs using NestJS for chat, session management, and analytics",
       "Integrated Redis for caching and real-time event handling",
       "Deployed and managed infrastructure on AWS (EC2, S3, CloudFront, RDS)"
-    ],
-    impact: [
-      "Enabled real-time communication with minimal latency",
-      "Improved system scalability and user experience for concurrent users"
     ]
   },
   hirez: {
@@ -183,10 +179,6 @@ const projectData = {
       "Designed database schema using Prisma and PostgreSQL for efficient data handling",
       "Optimized database queries for faster property search and filtering",
       "Built responsive frontend interfaces using Next.js for seamless user experience"
-    ],
-    impact: [
-      "Reduced dependency on brokers by enabling direct owner–tenant interaction",
-      "Improved performance of listing and search features"
     ]
   },
   microfinance: {
@@ -198,10 +190,6 @@ const projectData = {
       "Designed scalable APIs and database models for financial data handling",
       "Developed analytics dashboards to monitor loan performance and financial metrics",
       "Ensured secure data handling and structured workflows for financial operations"
-    ],
-    impact: [
-      "Streamlined manual financial processes into a digital system",
-      "Improved tracking accuracy and operational efficiency"
     ]
   },
   trackvision: {
@@ -213,10 +201,6 @@ const projectData = {
       "Built backend services using FastAPI for processing and serving tracking data",
       "Developed frontend dashboard for visualizing live tracking results",
       "Implemented alert mechanisms for event-based tracking insights"
-    ],
-    impact: [
-      "Enabled real-time monitoring and analysis of visual data",
-      "Improved tracking accuracy and responsiveness"
     ]
   },
   roadsafety: {
@@ -228,10 +212,6 @@ const projectData = {
       "Implemented real-time alert system for monitoring unsafe driving patterns",
       "Integrated IoT/visual data inputs for continuous analysis",
       "Built processing pipeline for handling real-time video streams"
-    ],
-    impact: [
-      "Enhanced traffic monitoring and safety awareness",
-      "Provided automated detection of violations"
     ]
   }
 };
@@ -256,14 +236,6 @@ function openP(id) {
       <ul class="m-list">
         ${p.contributions.map(c => `<li>${c}</li>`).join('')}
       </ul>
-    </div>
-    <div class="m-section">
-      <div class="m-section-title">Impact</div>
-      <div class="m-impact">
-        <ul class="m-list m-impact-list">
-          ${p.impact.map(i => `<li>${i}</li>`).join('')}
-        </ul>
-      </div>
     </div>
   `;
 
