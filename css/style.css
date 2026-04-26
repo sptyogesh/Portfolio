@@ -1,0 +1,18 @@
+/* ═══════════════════════════════════════
+   MAIN STYLE ENTRY
+═══════════════════════════════════════ */
+
+/* Base & Design System */
+@import url('sections/base.css');
+
+/* Layout Components */
+@import url('sections/nav.css');
+
+/* Page Sections */
+@import url('sections/hero.css');
+@import url('sections/about.css');
+@import url('sections/skills.css');
+@import url('sections/experience.css');
+@import url('sections/projects.css');
+@import url('sections/focus.css');
+@import url('sections/contact.css');

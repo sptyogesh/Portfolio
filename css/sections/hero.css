@@ -1,0 +1,116 @@
+/* ═══════════════════════════════════════
+   HERO
+═══════════════════════════════════════ */
+#hero{
+  min-height:100vh;display:flex;align-items:center;
+  position:relative;padding:7rem 4rem 4rem;overflow:hidden;
+}
+.h-grid{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(var(--border) 1px,transparent 1px),
+    linear-gradient(90deg,var(--border) 1px,transparent 1px);
+  background-size:64px 64px;
+  mask-image:radial-gradient(ellipse 80% 60% at 50% 0%,black,transparent 75%);
+  -webkit-mask-image:radial-gradient(ellipse 80% 60% at 50% 0%,black,transparent 75%);
+  pointer-events:none;
+}
+.orb{position:absolute;border-radius:50%;pointer-events:none;animation:orbP 7s ease-in-out infinite}
+.orb1{
+  width:min(650px,80vw);height:min(650px,80vw);
+  background:radial-gradient(circle,rgba(108,99,255,.13) 0%,transparent 70%);
+  top:-10%;right:-5%;
+}
+.orb2{
+  width:min(450px,60vw);height:min(450px,60vw);
+  background:radial-gradient(circle,rgba(0,217,160,.09) 0%,transparent 70%);
+  bottom:5%;left:5%;animation-delay:-3s;animation-duration:9s;
+}
+@keyframes orbP{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.08);opacity:.7}}
+
+.hero-inner{position:relative;z-index:1;max-width:860px;width:100%}
+.h-badge{
+  font-family:'DM Mono',monospace;font-size:.72rem;letter-spacing:.14em;
+  color:var(--accent2);margin-bottom:1.5rem;
+  display:inline-flex;align-items:center;gap:.6rem;
+}
+.h-badge::before{content:'';display:block;width:28px;height:1px;background:var(--accent2)}
+.h-dot{
+  width:7px;height:7px;border-radius:50%;background:var(--accent2);
+  animation:blink 2s infinite;box-shadow:0 0 6px var(--accent2);
+}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+.h-name{
+  font-family:'Syne',sans-serif;font-weight:800;
+  font-size:clamp(3rem,10vw,7.5rem);
+  line-height:.92;letter-spacing:-.04em;margin-bottom:.2em;
+}
+.h-name .outline{
+  color:transparent;
+  -webkit-text-stroke:1.5px var(--hero-stroke);
+}
+.h-power{
+  font-family:'DM Mono',monospace;
+  font-size:clamp(.75rem,1.5vw,.9rem);
+  letter-spacing:.06em;color:var(--accent);
+  margin-bottom:1.2rem;font-weight:500;
+  display:flex;align-items:center;gap:.6rem;
+}
+.h-sub{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(.9rem,2vw,1.2rem);font-weight:400;
+  color:var(--muted);margin:1rem 0 1.5rem;
+}
+.h-sub strong{color:var(--accent);font-weight:600}
+.h-desc{
+  font-size:clamp(.88rem,1.5vw,.98rem);
+  color:var(--muted);max-width:520px;margin-bottom:2.5rem;line-height:1.85;
+}
+.h-btns{display:flex;gap:.9rem;flex-wrap:wrap}
+.btn-p{
+  font-family:'DM Mono',monospace;font-size:.8rem;letter-spacing:.05em;
+  padding:.85rem 1.8rem;background:var(--accent);color:#fff;
+  border:1px solid var(--accent);border-radius:4px;cursor:pointer;
+  transition:all .22s;position:relative;overflow:hidden;
+  display:inline-block;
+}
+.btn-p:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(var(--accent-rgb),.35)}
+.btn-s{
+  font-family:'DM Mono',monospace;font-size:.8rem;letter-spacing:.05em;
+  padding:.85rem 1.8rem;background:transparent;color:var(--text);
+  border:1px solid var(--border-b);border-radius:4px;cursor:pointer;
+  transition:all .22s;display:inline-block;
+}
+.btn-s:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
+
+.h-stats{
+  position:absolute;right:4rem;bottom:4rem;
+  display:flex;flex-direction:column;gap:1.8rem;z-index:1;
+}
+.st{text-align:right;padding-right:1rem;border-right:2px solid var(--accent)}
+.st-n{font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--text);line-height:1}
+.st-l{font-family:'DM Mono',monospace;font-size:.64rem;color:var(--muted);letter-spacing:.1em;margin-top:.2rem}
+
+@media(min-width:1400px){
+  #hero{padding:8rem 6rem 5rem}
+  .h-stats{right:6rem}
+}
+@media(max-width:1199px){
+  #hero{padding:7rem 2.5rem 4rem}
+  .h-stats{right:2.5rem;bottom:3rem}
+}
+@media(max-width:999px){
+  #hero{padding:6.5rem 2rem 3rem}
+  .h-stats{display:none}
+}
+@media(max-width:767px){
+  #hero{padding:6rem 1.5rem 3rem}
+  .h-name{font-size:clamp(2.8rem,13vw,4.8rem)}
+}
+@media(max-width:479px){
+  #hero{padding:5.5rem 1rem 2.5rem}
+  .h-badge{font-size:.64rem}
+  .h-name{font-size:clamp(1.8rem,10.2vw,2.8rem);letter-spacing:-.06em}
+  .h-btns{flex-direction:column}
+  .btn-p,.btn-s{text-align:center;width:100%}
+}

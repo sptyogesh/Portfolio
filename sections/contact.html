@@ -1,0 +1,62 @@
+<section id="contact">
+  <div class="ct-grid reveal">
+    <div class="ct-info">
+      <div class="s-tag">// contact</div>
+      <h2 class="s-title">Let's build<br>something great</h2>
+      <!-- <div class="status-badge">
+        <div class="s-dot"></div> Available for opportunities
+      </div> -->
+      <p>Open to full-time roles, freelance projects, and collaborations. If you're building something impactful or need a reliable developer, let's connect..</p>
+      <div class="c-icons">
+        <a href="mailto:yogeshpmk2004@gmail.com" class="c-icon" title="Send Email" data-tip="Send Email">
+          <i class="uil uil-envelope"></i>
+        </a>
+
+        <a href="https://www.linkedin.com/in/yogesh-p-4b9454325" target="_blank" class="c-icon" title="View Profile" data-tip="View Profile">
+          <i class="uil uil-linkedin-alt"></i>
+        </a>
+
+        <a href="https://github.com/sptyogesh" target="_blank" class="c-icon" title="View Projects" data-tip="View Projects">
+          <i class="uil uil-github-alt"></i>
+        </a>
+
+        <a href="tel:+917598400864" class="c-icon" title="Call" data-tip="Call">
+          <i class="uil uil-phone"></i>
+        </a>
+      </div>
+    </div>
+    <div class="ct-form-wrapper">
+      <form id="contactForm" action="https://formspree.io/f/mjgjzarn" method="POST" class="ct-form">
+        <div class="fg">
+          <label class="fl" for="name">YOUR NAME</label>
+          <input type="text" id="name" name="name" class="fi" placeholder="Your Name" required minlength="2">
+          <span class="err-txt" id="nameErr">Please enter your name</span>
+        </div>
+        <div class="fg">
+          <label class="fl" for="email">EMAIL ADDRESS</label>
+          <input type="email" id="email" name="email" class="fi" placeholder="Your Email" required>
+          <span class="err-txt" id="emailErr">Please enter a valid email</span>
+        </div>
+        <div class="fg">
+          <label class="fl" for="message">MESSAGE</label>
+          <textarea id="message" name="message" class="fi" rows="5" placeholder="Tell me about your project or opportunity…" required minlength="10"></textarea>
+          <span class="err-txt" id="msgErr">Message should be at least 10 characters</span>
+        </div>
+        <button type="submit" id="submitBtn" class="btn-p" style="width:fit-content">
+          <span>Start Conversation</span>
+          <div class="loader" id="loader"></div>
+        </button>
+        <span class="res-note">Typically respond within 24 hours.</span>
+      </form>
+
+      <div id="successMsg" class="success-msg">
+        <div class="s-icon">
+          <i class="uil uil-check-circle"></i>
+        </div>
+        <h3>Message Sent!</h3>
+        <p>Thanks for reaching out. I'll get back to you soon.</p>
+        <button class="btn-s" onclick="resetForm()">Send another</button>
+      </div>
+    </div>
+  </div>
+</section>
