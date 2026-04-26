@@ -66,14 +66,18 @@ const mobMenu = document.getElementById('mobMenu');
 function initMobileMenu() {
   if (!hbg || !mobMenu) return;
   hbg.onclick = () => {
-    hbg.classList.toggle('open');
+    const isOpen = hbg.classList.toggle('open');
     mobMenu.classList.toggle('open');
+    document.body.style.overflow = isOpen ? 'hidden' : '';
   };
 }
 
 function closeM() {
+  const hbg = document.getElementById('hbg');
+  const mobMenu = document.getElementById('mobMenu');
   if (hbg) hbg.classList.remove('open');
   if (mobMenu) mobMenu.classList.remove('open');
+  document.body.style.overflow = '';
 }
 
 document.addEventListener('click', (e) => {
