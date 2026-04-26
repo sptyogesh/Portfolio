@@ -103,7 +103,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:0}
   section{padding:3.5rem 1rem}
   .s-title{font-size:clamp(1.5rem,7vw,2rem)}
 }
-@media(hover:none){.cr,.crr{display:none}}
+@media(hover:none),(max-width:1024px){.cr,.crr{display:none !important}}
 
 /* ═══════════════════════════════════════
    FLOATING WHATSAPP
