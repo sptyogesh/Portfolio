@@ -23,6 +23,7 @@
 .cl{background:rgba(255,200,100,.1)}
 .mo{background:rgba(100,200,255,.1)}
 .to{background:rgba(200,150,255,.1)}
+.la{background:rgba(255,160,50,.1)}
 .sk-title{font-family:'Syne',sans-serif;font-size:.9rem;font-weight:600;margin-bottom:.8rem;color:var(--text)}
 .sk-tags{display:flex;flex-wrap:wrap;gap:.32rem}
 .sk-tag{

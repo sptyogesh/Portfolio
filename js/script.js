@@ -178,7 +178,6 @@ const projectData = {
       "Developed backend APIs for property listings, user management, and communication workflows",
       "Designed database schema using Prisma and PostgreSQL for efficient data handling",
       "Optimized database queries for faster property search and filtering",
-      "Built responsive frontend interfaces using Next.js for seamless user experience"
     ]
   },
   microfinance: {
@@ -198,7 +197,6 @@ const projectData = {
     desc: "An AI-powered system for tracking and monitoring objects in real-time using computer vision models.",
     contributions: [
       "Integrated AI models for object detection and tracking using TensorFlow",
-      "Built backend services using FastAPI for processing and serving tracking data",
       "Developed frontend dashboard for visualizing live tracking results",
       "Implemented alert mechanisms for event-based tracking insights"
     ]
@@ -210,7 +208,6 @@ const projectData = {
     contributions: [
       "Developed computer vision models to detect traffic violations",
       "Implemented real-time alert system for monitoring unsafe driving patterns",
-      "Integrated IoT/visual data inputs for continuous analysis",
       "Built processing pipeline for handling real-time video streams"
     ]
   }
